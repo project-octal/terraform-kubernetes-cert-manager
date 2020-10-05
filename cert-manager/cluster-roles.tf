@@ -37,7 +37,7 @@ resource "kubernetes_cluster_role" "issuers_cluster_role" {
   }
 }
 
-resource "kubernetes_cluster_role" "cluster_issuers_cluster_role" {
+resource "kubernetes_cluster_role" "clusterissuers_cluster_role" {
   metadata {
     name = "${var.name}-controller-clusterissuers"
     namespace: var.namespace
@@ -77,7 +77,7 @@ resource "kubernetes_cluster_role" "cluster_issuers_cluster_role" {
   }
 }
 
-resource "kubernetes_cluster_role" "issuers_cluster_role" {
+resource "kubernetes_cluster_role" "certificates_cluster_role" {
   metadata {
     name = "${var.name}-certificates"
     namespace: var.namespace

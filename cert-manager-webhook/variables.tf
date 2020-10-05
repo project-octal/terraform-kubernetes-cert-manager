@@ -2,6 +2,9 @@ variable "name" {
   type    = string
   default = "cert-manager-webhook"
 }
+variable "instance_id" {
+  type = string
+}
 variable "component" {
   type    = string
   default = "webhook"

@@ -1,3 +1,7 @@
+resource "k8s_manifest" "mutating_webhook_configuration" {
+  content = yamlencode(local.mutating_webhook_configuration)
+}
+
 locals {
   mutating_webhook_configuration = {
     "apiVersion" = "admissionregistration.k8s.io/v1beta1"

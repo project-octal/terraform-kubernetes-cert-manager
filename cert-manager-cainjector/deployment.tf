@@ -36,11 +36,7 @@ resource "kubernetes_deployment" "deployment" {
           ]
           env {
             name = "POD_NAMESPACE"
-            value_from {
-              field_ref {
-                field_path = "metadata.namespace"
-              }
-            }
+            value = var.namespace
           }
           # TODO: Resources for cainjector
           resources {}

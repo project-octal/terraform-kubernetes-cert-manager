@@ -12,8 +12,17 @@ variable "component" {
 variable "namespace" {
   type = string
 }
+variable "image_tag" {
+  type = string
+  default = "v0.13.0"
+}
+variable "image_name" {
+  type = string
+  default = "jetstack/cert-manager-webhook"
+}
 variable "image_repository" {
   type = string
+  default = "quay.io"
 }
 variable "image_pull_policy" {
   type = string

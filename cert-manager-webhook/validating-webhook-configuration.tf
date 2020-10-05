@@ -47,7 +47,7 @@ locals {
         }
       ]
       "failurePolicy" = "Fail"
-      "sideEffects"   = None
+      "sideEffects"   = "None"
       "clientConfig" = {
         service = {
           name      = var.name

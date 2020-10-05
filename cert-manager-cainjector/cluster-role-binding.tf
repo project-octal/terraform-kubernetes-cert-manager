@@ -1,7 +1,6 @@
 resource "kubernetes_cluster_role_binding" "cluster_role_binding" {
   metadata {
     name      = var.name
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -9,7 +8,7 @@ resource "kubernetes_cluster_role_binding" "cluster_role_binding" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.cluster_role.metadata.0.namespace
+    name      = kubernetes_cluster_role.cluster_role.metadata.0.name
   }
   subject {
     kind      = "ServiceAccount"

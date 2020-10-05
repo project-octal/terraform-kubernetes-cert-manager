@@ -1,7 +1,6 @@
 resource "kubernetes_cluster_role" "issuers_cluster_role" {
   metadata {
     name      = "${var.name}-controller-issuers"
-    namespace = "kube-system"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -40,7 +39,6 @@ resource "kubernetes_cluster_role" "issuers_cluster_role" {
 resource "kubernetes_cluster_role" "clusterissuers_cluster_role" {
   metadata {
     name      = "${var.name}-controller-clusterissuers"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -80,7 +78,6 @@ resource "kubernetes_cluster_role" "clusterissuers_cluster_role" {
 resource "kubernetes_cluster_role" "certificates_cluster_role" {
   metadata {
     name      = "${var.name}-certificates"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -140,7 +137,6 @@ resource "kubernetes_cluster_role" "certificates_cluster_role" {
 resource "kubernetes_cluster_role" "orders_cluster_role" {
   metadata {
     name      = "${var.name}-controller-orders"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -212,7 +208,6 @@ resource "kubernetes_cluster_role" "orders_cluster_role" {
 resource "kubernetes_cluster_role" "challenges_cluster_role" {
   metadata {
     name      = "${var.name}-controller-challenges"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -297,7 +292,6 @@ resource "kubernetes_cluster_role" "challenges_cluster_role" {
 resource "kubernetes_cluster_role" "ingress_shim_cluster_role" {
   metadata {
     name      = "${var.name}-controller-ingress-shim"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -349,12 +343,11 @@ resource "kubernetes_cluster_role" "ingress_shim_cluster_role" {
 resource "kubernetes_cluster_role" "view_cluster_role" {
   metadata {
     name      = "${var.name}-view"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name"                       = var.name
-      rbac.authorization.k8s.io / aggregate-to-view  = "true"
-      rbac.authorization.k8s.io / aggregate-to-edit  = "true"
-      rbac.authorization.k8s.io / aggregate-to-admin = "true"
+      "rbac.authorization.k8s.io/aggregate-to-view"  = "true"
+      "rbac.authorization.k8s.io/aggregate-to-edit"  = "true"
+      "rbac.authorization.k8s.io/aggregate-to-admin" = "true"
     }, local.labels)
   }
   rule {
@@ -371,11 +364,10 @@ resource "kubernetes_cluster_role" "view_cluster_role" {
 resource "kubernetes_cluster_role" "edit_cluster_role" {
   metadata {
     name      = "${var.name}-edit"
-    namespace = var.namespace
     labels = merge({
       "app.kubernetes.io/name"                       = var.name
-      rbac.authorization.k8s.io / aggregate-to-edit  = "true"
-      rbac.authorization.k8s.io / aggregate-to-admin = "true"
+      "rbac.authorization.k8s.io/aggregate-to-edit"  = "true"
+      "rbac.authorization.k8s.io/aggregate-to-admin" = "true"
     }, local.labels)
   }
   rule {

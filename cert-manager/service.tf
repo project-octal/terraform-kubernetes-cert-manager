@@ -14,8 +14,8 @@ resource "kubernetes_service" "service" {
       target_port = 9402
     }
     selector = {
-      app.kubernetes.io / name : var.name
-      app.kubernetes.io / instance : var.instance_id
+      "app.kubernetes.io/name" : var.name
+      "app.kubernetes.io/instance" : var.instance_id
     }
   }
 }

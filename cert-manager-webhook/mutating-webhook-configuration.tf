@@ -5,7 +5,7 @@ resource "k8s_manifest" "mutating_webhook_configuration" {
 locals {
   mutating_webhook_configuration = {
     "apiVersion" = "admissionregistration.k8s.io/v1beta1"
-    "kind" = "MutatingWebhookConfiguration"
+    "kind"       = "MutatingWebhookConfiguration"
     "metadata" = {
       "name" = var.name
 
@@ -20,19 +20,19 @@ locals {
       "name" = "webhook.cert-manager.io"
       "rules" = [
         {
-          apiGroups = ["cert-manager.io", "acme.cert-manager.io"]
+          apiGroups   = ["cert-manager.io", "acme.cert-manager.io"]
           apiVersions = ["v1alpha2"]
-          operations = ["CREATE", "UPDATE"]
-          resources = ["*/*"]
+          operations  = ["CREATE", "UPDATE"]
+          resources   = ["*/*"]
         }
       ]
       failurePolicy = "Fail"
-      sideEffects = "None"
+      sideEffects   = "None"
       clientConfig = {
         service = {
-          name = var.name
+          name      = var.name
           namespace = var.namespace
-          path = "/mutate"
+          path      = "/mutate"
         }
       }
     }

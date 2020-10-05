@@ -9,13 +9,13 @@ resource "kubernetes_service" "service" {
   spec {
     type = "ClusterIP"
     port {
-      protocol = "TCP"
-      port = 9402
+      protocol    = "TCP"
+      port        = 9402
       target_port = 9402
     }
     selector = {
-      app.kubernetes.io/name: var.name
-      app.kubernetes.io/instance: var.instance_id
+      app.kubernetes.io / name : var.name
+      app.kubernetes.io / instance : var.instance_id
     }
   }
 }

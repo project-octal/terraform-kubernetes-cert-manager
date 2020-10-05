@@ -9,15 +9,15 @@ resource "kubernetes_service" "service" {
   spec {
     type = "ClusterIP"
     port {
-      name = "https"
-      port = 443
+      name        = "https"
+      port        = 443
       target_port = 10250
     }
     selector = {
-      app: local.app
-      app.kubernetes.io/name: var.name
-      app.kubernetes.io/instance: var.instance_id
-      app.kubernetes.io/managed-by: "terraform"
+      app : local.app
+      app.kubernetes.io / name : var.name
+      app.kubernetes.io / instance : var.instance_id
+      app.kubernetes.io / managed-by : "terraform"
     }
   }
 }

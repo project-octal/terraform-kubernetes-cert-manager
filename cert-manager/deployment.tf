@@ -3,17 +3,17 @@ resource "kubernetes_deployment" "deployment" {
     name      = var.name
     namespace = var.namespace
     labels = merge({
-      "app.kubernetes.io/name" : var.name
+      "app.kubernetes.io/name" = var.name
     }, local.labels)
   }
   spec {
     replicas = 1
     selector {
       match_labels = {
-        app: local.app
-        app.kubernetes.io/name: var.name
-        app.kubernetes.io/instance: var.instance_id
-        app.kubernetes.io/managed-by: "terraform"
+        app                            = local.app
+        app.kubernetes.io / name       = var.name
+        app.kubernetes.io / instance   = var.instance_id
+        app.kubernetes.io / managed-by = "terraform"
       }
     }
     template {
@@ -21,19 +21,19 @@ resource "kubernetes_deployment" "deployment" {
         name      = var.name
         namespace = var.namespace
         labels = merge({
-          "app.kubernetes.io/name" : var.name
+          "app.kubernetes.io/name" = var.name
         }, local.labels)
         annotations = {
-          "prometheus.io/path": "/metrics"
-          "prometheus.io/scrape": 'true'
-          "prometheus.io/port": '9402'
+          "prometheus.io/path"   = "/metrics"
+          "prometheus.io/scrape" = "true"
+          "prometheus.io/port"   = "9402"
         }
       }
       spec {
         service_account_name = kubernetes_service_account.service_account.metadata.0.name
         container {
-          name = var.name
-          image = "${var.image_repository}/${var.image_name}:${var.image_tag}"
+          name              = var.name
+          image             = "${var.image_repository}/${var.image_name}:${var.image_tag}"
           image_pull_policy = var.image_pull_policy
           args = [
             "--v=2",
@@ -45,16 +45,16 @@ resource "kubernetes_deployment" "deployment" {
             "--webhook-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc"
           ]
           port {
-            protocol = "TCP"
+            protocol       = "TCP"
             container_port = 9402
           }
           env {
-            name = "POD_NAMESPACE"
+            name  = "POD_NAMESPACE"
             value = var.namespace
           }
           resources {
             requests {
-              cpu = "10m"
+              cpu    = "10m"
               memory = "32Mi"
             }
           }

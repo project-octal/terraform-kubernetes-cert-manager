@@ -11,9 +11,9 @@ resource "kubernetes_deployment" "deployment" {
     selector {
       match_labels = {
         "app" = local.app
-        "app.kubernetes.io/name": var.name
-        "app.kubernetes.io/instance": var.instance_id
-        "app.kubernetes.io/managed-by": "terraform"
+        "app.kubernetes.io/name" : var.name
+        "app.kubernetes.io/instance" : var.instance_id
+        "app.kubernetes.io/managed-by" : "terraform"
       }
     }
     template {
@@ -27,7 +27,7 @@ resource "kubernetes_deployment" "deployment" {
       spec {
         service_account_name = kubernetes_service_account.service_account.metadata.0.name
         container {
-          name = var.name
+          name              = var.name
           image             = "${var.image_repository}/${var.image_name}:${var.image_tag}"
           image_pull_policy = var.image_pull_policy
           args = [
@@ -38,26 +38,26 @@ resource "kubernetes_deployment" "deployment" {
           ]
           liveness_probe {
             http_get {
-              path = "/livez"
-              port = 6080
+              path   = "/livez"
+              port   = 6080
               scheme = "HTTP"
             }
           }
           readiness_probe {
             http_get {
-              path = "/healthz"
-              port = "6080"
+              path   = "/healthz"
+              port   = "6080"
               scheme = "HTTP"
             }
           }
           env {
-            name = "POD_NAMESPACE"
+            name  = "POD_NAMESPACE"
             value = var.namespace
           }
           # TODO: Resources for webhook
           resources {}
           volume_mount {
-            name = "certs"
+            name       = "certs"
             mount_path = "/certs"
           }
         }

@@ -5,13 +5,13 @@ resource "k8s_manifest" "validating_webhook_configuration" {
 locals {
   validating_webhook_configuration = {
     "apiVersion" = "admissionregistration.k8s.io/v1beta1"
-    "kind" = "ValidatingWebhookConfiguration"
+    "kind"       = "ValidatingWebhookConfiguration"
     "metadata" = {
       "name" = var.name
       "labels" = {
-        "app" = local.app
-        "app.kubernetes.io/name" = var.name
-        "app.kubernetes.io/instance" = var.instance_id
+        "app"                          = local.app
+        "app.kubernetes.io/name"       = var.name
+        "app.kubernetes.io/instance"   = var.instance_id
         "app.kubernetes.io/managed-by" = "terraform"
       }
       "annotations" = {
@@ -27,32 +27,32 @@ locals {
               "true"
             ]
             operator = "NotIn"
-            key = "cert-manager.io/disable-validation"
+            key      = "cert-manager.io/disable-validation"
           },
           {
             values = [
               "cert-manager"
             ]
             operator = "NotIn"
-            key = "name"
+            key      = "name"
           }
         ]
       }
       "rules" = [
         {
-          apiGroups = ["cert-manager.io", "acme.cert-manager.io"]
+          apiGroups   = ["cert-manager.io", "acme.cert-manager.io"]
           apiVersions = ["v1alpha2"]
-          operations = ["CREATE", "UPDATE"]
-          resources = ["*/*"]
+          operations  = ["CREATE", "UPDATE"]
+          resources   = ["*/*"]
         }
       ]
       "failurePolicy" = "Fail"
-      "sideEffects" = None
+      "sideEffects"   = None
       "clientConfig" = {
         service = {
-          name = var.name
+          name      = var.name
           namespace = var.namespace
-          path = "/mutate"
+          path      = "/mutate"
         }
       }
     }

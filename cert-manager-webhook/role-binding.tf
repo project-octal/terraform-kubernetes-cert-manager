@@ -8,13 +8,13 @@ resource "kubernetes_role_binding" "role_binding" {
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
-    kind = "Role"
-    name = "extension-apiserver-authentication-reader"
+    kind      = "Role"
+    name      = "extension-apiserver-authentication-reader"
   }
   subject {
     api_group = ""
-    kind = "ServiceAccount"
-    name = kubernetes_service_account.service_account.metadata.0.name
+    kind      = "ServiceAccount"
+    name      = kubernetes_service_account.service_account.metadata.0.name
     namespace = kubernetes_service_account.service_account.metadata.0.namespace
   }
 }

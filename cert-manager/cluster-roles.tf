@@ -1,6 +1,6 @@
 resource "kubernetes_cluster_role" "issuers_cluster_role" {
   metadata {
-    name      = "${var.name}-controller-issuers"
+    name = "${var.name}-controller-issuers"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -38,7 +38,7 @@ resource "kubernetes_cluster_role" "issuers_cluster_role" {
 
 resource "kubernetes_cluster_role" "clusterissuers_cluster_role" {
   metadata {
-    name      = "${var.name}-controller-clusterissuers"
+    name = "${var.name}-controller-clusterissuers"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -77,7 +77,7 @@ resource "kubernetes_cluster_role" "clusterissuers_cluster_role" {
 
 resource "kubernetes_cluster_role" "certificates_cluster_role" {
   metadata {
-    name      = "${var.name}-certificates"
+    name = "${var.name}-certificates"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -136,7 +136,7 @@ resource "kubernetes_cluster_role" "certificates_cluster_role" {
 
 resource "kubernetes_cluster_role" "orders_cluster_role" {
   metadata {
-    name      = "${var.name}-controller-orders"
+    name = "${var.name}-controller-orders"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -207,7 +207,7 @@ resource "kubernetes_cluster_role" "orders_cluster_role" {
 
 resource "kubernetes_cluster_role" "challenges_cluster_role" {
   metadata {
-    name      = "${var.name}-controller-challenges"
+    name = "${var.name}-controller-challenges"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -291,7 +291,7 @@ resource "kubernetes_cluster_role" "challenges_cluster_role" {
 
 resource "kubernetes_cluster_role" "ingress_shim_cluster_role" {
   metadata {
-    name      = "${var.name}-controller-ingress-shim"
+    name = "${var.name}-controller-ingress-shim"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
@@ -342,7 +342,7 @@ resource "kubernetes_cluster_role" "ingress_shim_cluster_role" {
 
 resource "kubernetes_cluster_role" "view_cluster_role" {
   metadata {
-    name      = "${var.name}-view"
+    name = "${var.name}-view"
     labels = merge({
       "app.kubernetes.io/name"                       = var.name
       "rbac.authorization.k8s.io/aggregate-to-view"  = "true"
@@ -363,7 +363,7 @@ resource "kubernetes_cluster_role" "view_cluster_role" {
 
 resource "kubernetes_cluster_role" "edit_cluster_role" {
   metadata {
-    name      = "${var.name}-edit"
+    name = "${var.name}-edit"
     labels = merge({
       "app.kubernetes.io/name"                       = var.name
       "rbac.authorization.k8s.io/aggregate-to-edit"  = "true"

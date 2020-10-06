@@ -11,10 +11,10 @@ resource "kubernetes_deployment" "deployment" {
     replicas = 1
     selector {
       match_labels = {
-        app : local.app
-        "app.kubernetes.io/name" : var.name
-        "app.kubernetes.io/instance" : var.instance_id
-        "app.kubernetes.io/managed-by" : "terraform"
+        app                            = local.app
+        "app.kubernetes.io/name"       = var.name
+        "app.kubernetes.io/instance"   = var.instance_id
+        "app.kubernetes.io/managed-by" = "terraform"
       }
     }
     template {

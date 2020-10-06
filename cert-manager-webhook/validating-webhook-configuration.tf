@@ -19,7 +19,7 @@ locals {
       }
     }
     "webhooks" = [
-        {
+      {
         name = "webhook.cert-manager.io"
         namespaceSelector = {
           "matchExpressions" = [

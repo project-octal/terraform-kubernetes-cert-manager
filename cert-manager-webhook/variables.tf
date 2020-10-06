@@ -21,7 +21,7 @@ variable "image_name" {
   default = "jetstack/cert-manager-webhook"
 }
 variable "image_repository" {
-  type    = string
+  type = string
 }
 variable "image_pull_policy" {
   type = string

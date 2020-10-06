@@ -5,6 +5,7 @@ resource "kubernetes_deployment" "deployment" {
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)
+    annotations = {}
   }
   spec {
     replicas = 1

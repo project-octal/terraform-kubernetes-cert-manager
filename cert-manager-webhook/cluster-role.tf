@@ -1,6 +1,6 @@
 resource "kubernetes_cluster_role" "cluster_role" {
   metadata {
-    name      = "${var.name}:webhook-requester"
+    name = "${var.name}:webhook-requester"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)

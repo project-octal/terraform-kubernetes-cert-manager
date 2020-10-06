@@ -1,6 +1,6 @@
 resource "kubernetes_cluster_role_binding" "cluster_role_binding" {
   metadata {
-    name      = var.name
+    name = var.name
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)

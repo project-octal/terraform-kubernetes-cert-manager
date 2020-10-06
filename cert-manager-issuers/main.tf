@@ -1,3 +1,9 @@
+# This will be a decision tree. I should probably chop it down before it grows too large...
+output "default_issuer" {
+  value = var.letsencrypt.default_issuer ? var.letsencrypt.name : ""
+  # var.foocrypt.default_issuer ?  var.foocrypt.name : ""
+}
+
 module "letsencrypt_issuer" {
   source = "./letsencrypt"
 
@@ -10,3 +16,4 @@ module "letsencrypt_issuer" {
   secret_base64_key = var.letsencrypt.secret_base64_key
   ingress_class = var.letsencrypt.ingress_class
 }
+

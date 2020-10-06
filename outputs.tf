@@ -1,3 +1,3 @@
 output "cert_issuer" {
-  value = ""
+  value = module.cert_manager_issuers.default_issuer
 }

@@ -9,7 +9,7 @@ resource "kubernetes_role_binding" "role_binding" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "Role"
-    name      = "extension-apiserver-authentication-reader"
+    name      = kubernetes_role.role.metadata.0.name
   }
   subject {
     api_group = ""

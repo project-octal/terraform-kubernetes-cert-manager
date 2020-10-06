@@ -63,21 +63,11 @@ resource "kubernetes_deployment" "deployment" {
             mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
             read_only  = true
           }
-          volume_mount {
-            name       = "certs"
-            mount_path = "/certs"
-          }
         }
         volume {
           name = "service-token"
           secret {
             secret_name = kubernetes_service_account.service_account.default_secret_name
-          }
-        }
-        volume {
-          name = "certs"
-          secret {
-            secret_name = "cert-manager-webhook-tls"
           }
         }
       }

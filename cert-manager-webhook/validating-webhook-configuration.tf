@@ -15,7 +15,7 @@ locals {
         "app.kubernetes.io/managed-by" = "terraform"
       }
       "annotations" = {
-        "cert-manager.io/inject-ca-from-secret" = "cert-manager/cert-manager-webhook-tls"
+        "cert-manager.io/inject-ca-from-secret" = "cert-manager/cert-manager-webhook-ca"
       }
     }
     "webhooks" = [

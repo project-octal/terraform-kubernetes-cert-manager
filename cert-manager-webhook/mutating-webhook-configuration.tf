@@ -13,7 +13,7 @@ locals {
         "app.kubernetes.io/name" = var.name
       }, local.labels)
       annotations = {
-        "cert-manager.io/inject-ca-from-secret" = "cert-manager/cert-manager-webhook-tls"
+        "cert-manager.io/inject-ca-from-secret" = "cert-manager/cert-manager-webhook-ca"
       }
     }
     "webhooks" = [

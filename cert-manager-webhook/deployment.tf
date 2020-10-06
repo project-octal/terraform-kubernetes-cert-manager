@@ -57,8 +57,19 @@ resource "kubernetes_deployment" "deployment" {
           # TODO: Resources for webhook
           resources {}
           volume_mount {
+            name       = "service-token"
+            mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
+            read_only  = true
+          }
+          volume_mount {
             name       = "certs"
             mount_path = "/certs"
+          }
+        }
+        volume {
+          name = "service-token"
+          secret {
+            secret_name = kubernetes_service_account.service_account.default_secret_name
           }
         }
         volume {

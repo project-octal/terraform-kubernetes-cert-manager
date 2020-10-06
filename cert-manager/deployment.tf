@@ -37,7 +37,7 @@ resource "kubernetes_deployment" "deployment" {
           image_pull_policy = var.image_pull_policy
           args = [
             "--v=2",
-            "--cluster-resource-namespace=$(POD_NAMESPACE)",
+            "--namespace=$(POD_NAMESPACE)",
             "--leader-election-namespace=kube-system",
             "--webhook-namespace=$(POD_NAMESPACE)",
             "--webhook-ca-secret=cert-manager-webhook-ca",
@@ -57,6 +57,17 @@ resource "kubernetes_deployment" "deployment" {
               cpu    = "10m"
               memory = "32Mi"
             }
+          }
+          volume_mount {
+            name       = "service-token"
+            mount_path = "/var/run/secrets/kubernetes.io/serviceaccount/"
+            read_only  = true
+          }
+        }
+        volume {
+          name = "service-token"
+          secret {
+            secret_name = kubernetes_service_account.service_account.default_secret_name
           }
         }
       }

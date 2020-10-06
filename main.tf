@@ -34,7 +34,7 @@ module "cert_manager_webhook" {
 
 module "cert_manager_issuers" {
   source = "./cert-manager-issuers"
-
+  namespace = kubernetes_namespace.namespace.metadata.0.name
   letsencrypt = var.certificate_issuers.letsencrypt
   # Others will go here...
 }

@@ -1,6 +1,9 @@
 variable "name" {
   type = string
 }
+variable "namespace" {
+  type = string
+}
 variable "server" {
   type = string
 }
@@ -10,8 +13,18 @@ variable "email" {
 variable "ingress_class" {
   type = string
 }
-variable "labels" {
-  type = map(string)
+variable "secret_base64_key" {
+  type = string
+}
+
+resource "kubernetes_secret" "letsencrypt_issuer_secret" {
+  metadata {
+    name = var.name
+    namespace = var.namespace
+  }
+  data = {
+    "tls.key" = var.secret_base64_key
+  }
 }
 
 resource "k8s_manifest" "letsencrypt_issuer" {
@@ -24,16 +37,16 @@ locals {
     kind = "ClusterIssuer"
     metadata = {
       name = var.name
-      labels = merge({
+      labels = {
         name = var.name
-      }, var.labels)
+      }
     }
     spec = {
       acme = {
         server = var.server
         email = var.email
         privateKeySecretRef = {
-          name = var.name
+          name = kubernetes_secret.letsencrypt_issuer_secret.metadata.0.name
         }
         solvers = [
           {

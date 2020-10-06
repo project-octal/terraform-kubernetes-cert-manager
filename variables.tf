@@ -29,8 +29,8 @@ variable "certificate_issuers" {
       name: string,
       server: string,
       email: string,
-      ingress_class: string,
-      labels: map(string)
+      secret_key: string,
+      ingress_class: string
     })
     # TODO: Add support for another one so this doesnt look so silly
   })

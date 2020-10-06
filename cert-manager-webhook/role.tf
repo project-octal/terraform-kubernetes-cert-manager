@@ -1,7 +1,7 @@
 resource "kubernetes_role" "role" {
   metadata {
     name      = "${var.name}:dynamic-serving"
-    namespace = var.namespace
+    namespace = "kube-system"
     labels = merge({
       "app.kubernetes.io/name" = var.name
     }, local.labels)

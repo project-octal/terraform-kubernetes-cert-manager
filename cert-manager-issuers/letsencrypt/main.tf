@@ -23,7 +23,8 @@ resource "kubernetes_secret" "letsencrypt_issuer_secret" {
     namespace = var.namespace
   }
   data = {
-    "tls.key" = var.secret_base64_key
+    # We decode it before injecting it because the provider will re-encode it.
+    "tls.key" = base64decode(var.secret_base64_key)
   }
 }
 

@@ -31,3 +31,10 @@ module "cert_manager_webhook" {
   image_pull_policy = var.image_pull_policy
   labels            = local.labels
 }
+
+module "cert_manager_issuers" {
+  source = "./cert-manager-issuers"
+
+  letsencrypt = var.certificate_issuers.letsencrypt
+  # Others will go here...
+}

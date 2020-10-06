@@ -23,3 +23,19 @@ variable "labels" {
   description = "(optional) A map that consists of any additional labels that should be included with resources created by this module."
   default     = {}
 }
+variable "certificate_issuers" {
+  type = object({
+    letsencrypt = object({
+      name: string,
+      server: string,
+      email: string,
+      ingress_class: string,
+      labels: map(string)
+    })
+    # TODO: Add support for another one so this doesnt look so silly
+  })
+  description = "An object that contains the configuration for all the enabled certificate issuers."
+  default = {
+    letsencrypt = null
+  }
+}

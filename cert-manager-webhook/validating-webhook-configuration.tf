@@ -18,43 +18,49 @@ locals {
         "cert-manager.io/inject-ca-from-secret" = "cert-manager/cert-manager-webhook-tls"
       }
     }
-    "webhooks" = {
-      "name" = "webhook.cert-manager.io"
-      "namespaceSelector" = {
-        "matchExpressions" = [
+    "webhooks" = [
+        {
+        name = "webhook.cert-manager.io"
+        namespaceSelector = {
+          "matchExpressions" = [
+            {
+              values = [
+                "true"
+              ]
+              operator = "NotIn"
+              key      = "cert-manager.io/disable-validation"
+            },
+            {
+              values = [
+                "cert-manager"
+              ]
+              operator = "NotIn"
+              key      = "name"
+            }
+          ]
+        }
+        rules = [
           {
-            values = [
-              "true"
-            ]
-            operator = "NotIn"
-            key      = "cert-manager.io/disable-validation"
-          },
-          {
-            values = [
-              "cert-manager"
-            ]
-            operator = "NotIn"
-            key      = "name"
+            apiGroups   = ["cert-manager.io", "acme.cert-manager.io"]
+            apiVersions = ["v1alpha2"]
+            operations  = ["CREATE", "UPDATE"]
+            resources   = ["*/*"]
           }
         ]
-      }
-      "rules" = [
-        {
-          apiGroups   = ["cert-manager.io", "acme.cert-manager.io"]
-          apiVersions = ["v1alpha2"]
-          operations  = ["CREATE", "UPDATE"]
-          resources   = ["*/*"]
-        }
-      ]
-      "failurePolicy" = "Fail"
-      "sideEffects"   = "None"
-      "clientConfig" = {
-        service = {
-          name      = var.name
-          namespace = var.namespace
-          path      = "/mutate"
+        admissionReviewVersions = [
+          "v1",
+          "v1beta1"
+        ]
+        failurePolicy = "Fail"
+        sideEffects   = "None"
+        clientConfig = {
+          service = {
+            name      = var.name
+            namespace = var.namespace
+            path      = "/mutate"
+          }
         }
       }
-    }
+    ]
   }
 }

@@ -37,18 +37,6 @@ resource "kubernetes_deployment" "deployment" {
             "--dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)",
             "--dynamic-serving-ca-secret-name=cert-manager-webhook-ca",
             "--dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc"
-            #"--v=2",
-            #"--namespace=$(POD_NAMESPACE)",
-            #"--leader-election-namespace=kube-system",
-            #"--webhook-namespace=$(POD_NAMESPACE)",
-            #"--webhook-ca-secret=cert-manager-webhook-ca",
-            #"--webhook-serving-secret=cert-manager-webhook-tls",
-            #"--webhook-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc"
-            #
-            #"--v=2",
-            #"--secure-port=10250",
-            #"--tls-cert-file=/certs/tls.crt",
-            #"--tls-private-key-file=/certs/tls.key"
           ]
           liveness_probe {
             http_get {

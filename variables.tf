@@ -29,7 +29,7 @@ variable "certificate_issuers" {
       name: string,
       server: string,
       email: string,
-      secret_key: string,
+      secret_base64_key: string,
       ingress_class: string
     })
     # TODO: Add support for another one so this doesnt look so silly

@@ -9,8 +9,5 @@ terraform {
       source  = "banzaicloud/k8s"
       version = "0.8.0"
     }
-    random = {
-      source = "hashicorp/random"
-    }
   }
 }

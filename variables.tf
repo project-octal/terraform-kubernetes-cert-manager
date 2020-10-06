@@ -30,6 +30,7 @@ variable "certificate_issuers" {
       server: string,
       email: string,
       secret_base64_key: string,
+      default_issuer: bool,
       ingress_class: string
     })
     # TODO: Add support for another one so this doesnt look so silly

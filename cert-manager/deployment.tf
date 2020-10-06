@@ -37,12 +37,8 @@ resource "kubernetes_deployment" "deployment" {
           image_pull_policy = var.image_pull_policy
           args = [
             "--v=2",
-            "--namespace=$(POD_NAMESPACE)",
-            "--leader-election-namespace=kube-system",
-            "--webhook-namespace=$(POD_NAMESPACE)",
-            "--webhook-ca-secret=cert-manager-webhook-ca",
-            "--webhook-serving-secret=cert-manager-webhook-tls",
-            "--webhook-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc"
+            "--cluster-resource-namespace=$(POD_NAMESPACE)",
+            "--leader-election-namespace=kube-system"
           ]
           port {
             protocol       = "TCP"

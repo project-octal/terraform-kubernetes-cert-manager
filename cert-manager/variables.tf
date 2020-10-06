@@ -18,7 +18,7 @@ variable "image_tag" {
 }
 variable "image_name" {
   type    = string
-  default = "jetstack/cert-manager-cainjector"
+  default = "jetstack/cert-manager-controller"
 }
 variable "image_repository" {
   type    = string

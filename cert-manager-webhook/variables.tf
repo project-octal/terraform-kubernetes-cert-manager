@@ -22,7 +22,6 @@ variable "image_name" {
 }
 variable "image_repository" {
   type    = string
-  default = "quay.io"
 }
 variable "image_pull_policy" {
   type = string

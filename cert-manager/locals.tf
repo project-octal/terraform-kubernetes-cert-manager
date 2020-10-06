@@ -1,4 +1,5 @@
 locals {
+  image_repository = var.image_repository == null ? "quay.io" : var.image_repository
   app = "cert-manager"
   labels = merge({
     "app"                         = local.app

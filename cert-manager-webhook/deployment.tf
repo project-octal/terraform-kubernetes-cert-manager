@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "deployment" {
         service_account_name = kubernetes_service_account.service_account.metadata.0.name
         container {
           name              = var.name
-          image             = "${var.image_repository}/${var.image_name}:${var.image_tag}"
+          image             = "${local.image_repository}/${var.image_name}:${var.image_tag}"
           image_pull_policy = var.image_pull_policy
           args = [
             "--v=2",

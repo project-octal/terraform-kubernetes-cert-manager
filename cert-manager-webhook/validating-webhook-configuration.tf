@@ -43,7 +43,7 @@ locals {
           {
             apiGroups   = ["cert-manager.io", "acme.cert-manager.io"]
             apiVersions = ["v1alpha2"]
-            operations  = ["CREATE", "UPDATE", "UPDATE"]
+            operations  = ["CREATE", "UPDATE"]
             resources   = ["*/*"]
           }
         ]

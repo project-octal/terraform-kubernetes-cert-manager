@@ -19,7 +19,7 @@ variable "secret_base64_key" {
 
 resource "kubernetes_secret" "letsencrypt_issuer_secret" {
   metadata {
-    name = var.name
+    name      = var.name
     namespace = var.namespace
   }
   data = {
@@ -35,7 +35,7 @@ resource "k8s_manifest" "letsencrypt_issuer" {
 locals {
   letsencrypt_issuer = {
     apiVersion = "cert-manager.io/v1"
-    kind = "ClusterIssuer"
+    kind       = "ClusterIssuer"
     metadata = {
       name = var.name
       labels = {
@@ -45,7 +45,7 @@ locals {
     spec = {
       acme = {
         server = var.server
-        email = var.email
+        email  = var.email
         privateKeySecretRef = {
           name = kubernetes_secret.letsencrypt_issuer_secret.metadata.0.name
         }

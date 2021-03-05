@@ -49,8 +49,9 @@ resource "kubernetes_deployment" "deployment" {
             name  = "POD_NAMESPACE"
             value = var.namespace
           }
+
           resources {
-            requests {
+            requests = {
               cpu    = "10m"
               memory = "32Mi"
             }

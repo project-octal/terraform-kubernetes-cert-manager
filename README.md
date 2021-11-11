@@ -1,4 +1,4 @@
-![Project Octal Cert-Manager](docs/images/project-octal-cert-manager.svg "Project Octal Cert-Manager")
+![Project Octal: Cert-Manager](docs/images/project-octal-cert-manager.svg "Project Octal: Cert-Manager")
 ---
 
 Simplifies the deployment and management of Jetstacks cert-manager on a Kubernetes cluster.

@@ -1,9 +1,5 @@
-resource "k8s_manifest" "validating_webhook_configuration" {
-  content = yamlencode(local.validating_webhook_configuration)
-}
-
-locals {
-  validating_webhook_configuration = {
+resource "kubernetes_manifest" "validating_webhook_configuration" {
+  manifest = {
     "apiVersion" = "admissionregistration.k8s.io/v1beta1"
     "kind"       = "ValidatingWebhookConfiguration"
     "metadata" = {

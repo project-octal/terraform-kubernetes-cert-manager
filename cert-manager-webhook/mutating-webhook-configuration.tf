@@ -1,9 +1,5 @@
-resource "k8s_manifest" "mutating_webhook_configuration" {
-  content = yamlencode(local.mutating_webhook_configuration)
-}
-
-locals {
-  mutating_webhook_configuration = {
+resource "kubernetes_manifest" "mutating_webhook_configuration" {
+  manifest = {
     "apiVersion" = "admissionregistration.k8s.io/v1beta1"
     "kind"       = "MutatingWebhookConfiguration"
     "metadata" = {

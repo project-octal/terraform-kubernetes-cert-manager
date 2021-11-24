@@ -28,12 +28,8 @@ resource "kubernetes_secret" "letsencrypt_issuer_secret" {
   }
 }
 
-resource "k8s_manifest" "letsencrypt_issuer" {
-  content = yamlencode(local.letsencrypt_issuer)
-}
-
-locals {
-  letsencrypt_issuer = {
+resource "kubernetes_manifest" "letsencrypt_issuer" {
+  manifest = {
     apiVersion = "cert-manager.io/v1"
     kind       = "ClusterIssuer"
     metadata = {

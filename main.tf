@@ -5,6 +5,8 @@ module "custom_resource_definitions" {
 module "cert_manager_cainjector" {
   source = "./cert-manager-cainjector"
 
+  depends_on = [module.custom_resource_definitions]
+
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
   image_repository  = var.image_repository
@@ -14,6 +16,8 @@ module "cert_manager_cainjector" {
 
 module "cert_manager" {
   source = "./cert-manager"
+
+  depends_on = [module.custom_resource_definitions]
 
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
@@ -25,6 +29,8 @@ module "cert_manager" {
 module "cert_manager_webhook" {
   source = "./cert-manager-webhook"
 
+  depends_on = [module.custom_resource_definitions]
+
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
   image_repository  = var.image_repository
@@ -34,6 +40,9 @@ module "cert_manager_webhook" {
 
 module "cert_manager_issuers" {
   source      = "./cert-manager-issuers"
+
+  depends_on = [module.custom_resource_definitions]
+
   namespace   = kubernetes_namespace.namespace.metadata.0.name
   letsencrypt = var.certificate_issuers.letsencrypt
   # Others will go here...

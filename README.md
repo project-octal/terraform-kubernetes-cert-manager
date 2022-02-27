@@ -97,16 +97,6 @@ terraform apply -var-file secrets.tfvars
 module "cert_manager" {
   source = "github.com/project-octal/terraform-kubernetes-cert-manager"
 
-  certificate_issuers = {
-    letsencrypt = {
-      name              = "letsencrypt-prod"
-      server            = "https://acme-v02.api.letsencrypt.org/directory"
-      email             = "dylanturn@gmail.com"
-      secret_base64_key = var.letsencrypt_secret_base64_key
-      default_issuer : true,
-      ingress_class = module.traefik.ingress_class
-    }
-  }
 }
 ```
 
@@ -131,7 +121,6 @@ module "cert_manager" {
 |------|--------|---------|
 | <a name="module_cert_manager"></a> [cert\_manager](#module\_cert\_manager) | ./cert-manager | n/a |
 | <a name="module_cert_manager_cainjector"></a> [cert\_manager\_cainjector](#module\_cert\_manager\_cainjector) | ./cert-manager-cainjector | n/a |
-| <a name="module_cert_manager_issuers"></a> [cert\_manager\_issuers](#module\_cert\_manager\_issuers) | ./cert-manager-issuers | n/a |
 | <a name="module_cert_manager_webhook"></a> [cert\_manager\_webhook](#module\_cert\_manager\_webhook) | ./cert-manager-webhook | n/a |
 | <a name="module_custom_resource_definitions"></a> [custom\_resource\_definitions](#module\_custom\_resource\_definitions) | ./custom-resource-definitions | n/a |
 
@@ -157,5 +146,5 @@ module "cert_manager" {
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cert_issuer"></a> [cert\_issuer](#output\_cert\_issuer) | n/a |
+| <a name="output_namespace"></a> [namespace](#output\_namespace) | n/a |
 <!-- END_TF_DOCS -->

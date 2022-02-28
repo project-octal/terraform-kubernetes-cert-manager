@@ -32,6 +32,7 @@ resource "kubernetes_deployment" "deployment" {
       }
       spec {
         service_account_name = kubernetes_service_account.service_account.metadata.0.name
+        automount_service_account_token = false
         container {
           name              = var.name
           image             = "${local.image_repository}/${var.image_name}:${var.image_tag}"

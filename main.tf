@@ -39,7 +39,7 @@ module "cert_manager_webhook" {
 }
 
 module "cert_manager_issuers" {
-  source      = "./cert-manager-issuers"
+  source = "./cert-manager-issuers"
 
   depends_on = [module.custom_resource_definitions]
 

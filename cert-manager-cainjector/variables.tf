@@ -13,12 +13,10 @@ variable "namespace" {
   type = string
 }
 variable "image_tag" {
-  type    = string
-  default = "v1.0.2" #"v0.13.0"
+  type = string
 }
 variable "image_name" {
-  type    = string
-  default = "jetstack/cert-manager-cainjector"
+  type = string
 }
 variable "image_repository" {
   type = string

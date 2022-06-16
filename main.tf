@@ -9,6 +9,8 @@ module "cert_manager_cainjector" {
 
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
+  image_tag         = var.cainjector_image_tag
+  image_name        = var.cainjector_image_name
   image_repository  = var.image_repository
   image_pull_policy = var.image_pull_policy
   labels            = local.labels
@@ -21,6 +23,8 @@ module "cert_manager" {
 
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
+  image_tag         = var.manager_image_tag
+  image_name        = var.manager_image_name
   image_repository  = var.image_repository
   image_pull_policy = var.image_pull_policy
   labels            = local.labels
@@ -33,6 +37,8 @@ module "cert_manager_webhook" {
 
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
+  image_tag         = var.webhook_image_tag
+  image_name        = var.webhook_image_name
   image_repository  = var.image_repository
   image_pull_policy = var.image_pull_policy
   labels            = local.labels

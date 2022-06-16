@@ -8,6 +8,35 @@ variable "namespace_annotations" {
   description = "Additional namespace annotations."
   default     = {}
 }
+
+variable "manager_image_tag" {
+  type    = string
+  default = "v1.0.2" #"v0.13.0"
+}
+variable "manager_image_name" {
+  type    = string
+  default = "jetstack/cert-manager-controller"
+}
+
+variable "cainjector_image_tag" {
+  type    = string
+  default = "v1.0.2" #"v0.13.0"
+}
+variable "cainjector_image_name" {
+  type    = string
+  default = "jetstack/cert-manager-cainjector"
+}
+
+variable "webhook_image_tag" {
+  type    = string
+  default = "v1.0.2" #"v0.13.0"
+}
+variable "webhook_image_name" {
+  type    = string
+  default = "jetstack/cert-manager-webhook"
+}
+
+
 variable "image_repository" {
   type        = string
   description = "The image repository to use when pulling images"

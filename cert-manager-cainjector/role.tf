@@ -15,4 +15,11 @@ resource "kubernetes_role" "role" {
     ]
     verbs = ["get", "create", "update", "patch"]
   }
+  rule {
+    api_groups = ["coordination.k8s.io"]
+    resources = [
+      "leases"
+    ]
+    verbs = ["get"]
+  }
 }

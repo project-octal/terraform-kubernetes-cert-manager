@@ -263,7 +263,7 @@ resource "kubernetes_cluster_role" "challenges_cluster_role" {
     verbs = ["get", "list", "watch", "create", "delete"]
   }
   rule {
-    api_groups = ["extensions"]
+    api_groups = ["extensions", "networking.k8s.io"]
     resources = [
       "ingresses"
     ]
@@ -315,7 +315,7 @@ resource "kubernetes_cluster_role" "ingress_shim_cluster_role" {
     verbs = ["get", "list", "watch"]
   }
   rule {
-    api_groups = ["extensions"]
+    api_groups = ["extensions", "networking.k8s.io"]
     resources = [
       "ingresses"
     ]
@@ -325,7 +325,7 @@ resource "kubernetes_cluster_role" "ingress_shim_cluster_role" {
   # admission controller enabled:
   # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
   rule {
-    api_groups = ["extensions"]
+    api_groups = ["extensions", "networking.k8s.io"]
     resources = [
       "ingresses/finalizers"
     ]

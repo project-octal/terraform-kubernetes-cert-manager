@@ -20,6 +20,6 @@ resource "kubernetes_role" "role" {
     resources = [
       "leases"
     ]
-    verbs = ["get"]
+    verbs = ["get", "create"]
   }
 }

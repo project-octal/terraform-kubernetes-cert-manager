@@ -25,7 +25,7 @@ resource "kubernetes_cluster_role" "issuers_cluster_role" {
     resources = [
       "secrets"
     ]
-    verbs = ["get", "list", "watch", "create", "update", "delete"]
+    verbs = ["get", "list", "watch", "create", "patch", "update", "delete"]
   }
   rule {
     api_groups = [""]

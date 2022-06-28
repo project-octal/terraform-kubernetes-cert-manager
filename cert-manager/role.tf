@@ -8,12 +8,6 @@ resource "kubernetes_role" "role" {
   }
 
   rule {
-    api_groups = [""]
-    resources  = ["secrets"]
-    verbs      = ["list", "patch"]
-  }
-
-  rule {
     api_groups = ["coordination.k8s.io"]
     resources = [
       "leases"

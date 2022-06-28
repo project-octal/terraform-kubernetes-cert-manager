@@ -12,6 +12,9 @@ locals {
       route53 = {
         region = var.letsencrypt.solvers.dns01.route53.region
         role   = var.letsencrypt.solvers.dns01.route53.role
+        secretAccessKeySecretRef = {
+          name = ""
+        }
       }
     }
   }]

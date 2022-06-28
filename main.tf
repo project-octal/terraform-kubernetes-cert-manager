@@ -16,6 +16,15 @@ module "cert_manager_cainjector" {
   labels            = local.labels
 }
 
+locals {
+  eks_role_annotation = {
+    "eks.amazonaws.com/role-arn" = var.certificate_issuers.letsencrypt["solvers"]["dns01"]["route53"]["role"]
+  }
+  # eks_role_annotation = !lookup(var.certificate_issuers.letsencrypt, "solvers", false) ? null : !lookup(var.certificate_issuers.letsencrypt["solvers"], "dns01", false) ? null :
+  # !lookup(var.certificate_issuers.letsencrypt["solvers"]["dns01"], "route53", false) ? null :
+  # {eks.amazonaws.com/role-arn = var.certificate_issuers.letsencrypt["solvers"]["dns01"]["route53"]["role"]}
+}
+
 module "cert_manager" {
   source = "./cert-manager"
 
@@ -28,6 +37,9 @@ module "cert_manager" {
   image_repository  = var.image_repository
   image_pull_policy = var.image_pull_policy
   labels            = local.labels
+
+  service_account_annotations = local.eks_role_annotation
+  deployment_annotations      = local.eks_role_annotation
 }
 
 module "cert_manager_webhook" {

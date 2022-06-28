@@ -24,15 +24,18 @@ resource "kubernetes_deployment" "deployment" {
         labels = merge({
           "app.kubernetes.io/name" = var.name
         }, local.labels)
-        annotations = {
+        annotations = merge({
           "prometheus.io/path"   = "/metrics"
           "prometheus.io/scrape" = "true"
           "prometheus.io/port"   = "9402"
-        }
+        }, var.deployment_annotations)
       }
       spec {
         service_account_name            = kubernetes_service_account.service_account.metadata.0.name
         automount_service_account_token = false
+        security_context {
+          fs_group = "1001"
+        }
         container {
           name              = var.name
           image             = "${local.image_repository}/${var.image_name}:${var.image_tag}"

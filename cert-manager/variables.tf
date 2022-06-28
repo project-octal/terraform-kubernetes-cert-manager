@@ -24,6 +24,14 @@ variable "image_repository" {
 variable "image_pull_policy" {
   type = string
 }
+variable "service_account_annotations" {
+  type    = map(string)
+  default = null
+}
+variable "deployment_annotations" {
+  type    = map(string)
+  default = {}
+}
 variable "labels" {
   type = map(string)
 }

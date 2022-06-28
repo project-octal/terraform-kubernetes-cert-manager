@@ -26,14 +26,7 @@ resource "kubernetes_manifest" "letsencrypt_issuer" {
         privateKeySecretRef = {
           name = kubernetes_secret.letsencrypt_issuer_secret.metadata.0.name
         }
-        solvers = [
-          {
-            http01 = local.solver_http01
-          },
-          {
-            dns01 = local.solver_dns01
-          }
-        ]
+        solvers = local.enabled_solvers
       }
     }
   }

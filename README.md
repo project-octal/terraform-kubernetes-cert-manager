@@ -147,12 +147,14 @@ module "cert_manager" {
 |------|-------------|------|---------|:--------:|
 | <a name="input_cainjector_image_name"></a> [cainjector\_image\_name](#input\_cainjector\_image\_name) | n/a | `string` | `"jetstack/cert-manager-cainjector"` | no |
 | <a name="input_cainjector_image_tag"></a> [cainjector\_image\_tag](#input\_cainjector\_image\_tag) | n/a | `string` | `"v1.8.1"` | no |
-| <a name="input_certificate_issuers"></a> [certificate\_issuers](#input\_certificate\_issuers) | An object that contains the configuration for all the enabled certificate issuers. | <pre>object({<br>    letsencrypt = object({<br>      name : string,<br>      server : string,<br>      email : string,<br>      secret_base64_key : string,<br>      default_issuer : bool,<br>      ingress_class : string<br>    })<br>    # TODO: Add support for another one so this doesnt look so silly<br>  })</pre> | <pre>{<br>  "letsencrypt": null<br>}</pre> | no |
+| <a name="input_certificate_issuers"></a> [certificate\_issuers](#input\_certificate\_issuers) | An object that contains the configuration for all the enabled certificate issuers. | <pre>object({<br>    letsencrypt = object({<br>      name : string,<br>      server : string,<br>      email : string,<br>      secret_base64_key : string,<br>      default_issuer : bool,<br>      solvers = object({<br>        http01 = object({<br>          ingress_class = string<br>        }),<br>        dns01 = object({<br>          route53 = object({<br>            region = string,<br>            role   = string<br>          })<br>        })<br>      })<br>    })<br>    # TODO: Add support for another one so this doesnt look so silly<br>  })</pre> | <pre>{<br>  "letsencrypt": null<br>}</pre> | no |
+| <a name="input_deploy_crds"></a> [deploy\_crds](#input\_deploy\_crds) | Set to false if the cert-managers custom resource definitions will be deployed outside this module | `bool` | `true` | no |
 | <a name="input_image_pull_policy"></a> [image\_pull\_policy](#input\_image\_pull\_policy) | Determines when the image should be pulled prior to starting the container. `Always`: Always pull the image. \| `IfNotPresent`: Only pull the image if it does not already exist on the node. \| `Never`: Never pull the image | `string` | `"Always"` | no |
 | <a name="input_image_repository"></a> [image\_repository](#input\_image\_repository) | The image repository to use when pulling images | `string` | `null` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | (optional) A map that consists of any additional labels that should be included with resources created by this module. | `map(string)` | `{}` | no |
 | <a name="input_manager_image_name"></a> [manager\_image\_name](#input\_manager\_image\_name) | n/a | `string` | `"jetstack/cert-manager-controller"` | no |
 | <a name="input_manager_image_tag"></a> [manager\_image\_tag](#input\_manager\_image\_tag) | n/a | `string` | `"v1.8.1"` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name given to this Cert-Manager deployment. | `string` | `"cert-manager"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace that Cert-Manager will reside in. | `string` | `"cert-manager"` | no |
 | <a name="input_namespace_annotations"></a> [namespace\_annotations](#input\_namespace\_annotations) | Additional namespace annotations. | `map(string)` | `{}` | no |
 | <a name="input_webhook_image_name"></a> [webhook\_image\_name](#input\_webhook\_image\_name) | n/a | `string` | `"jetstack/cert-manager-webhook"` | no |
@@ -163,4 +165,6 @@ module "cert_manager" {
 | Name | Description |
 |------|-------------|
 | <a name="output_cert_issuer"></a> [cert\_issuer](#output\_cert\_issuer) | n/a |
+| <a name="output_cert_manager_service_account"></a> [cert\_manager\_service\_account](#output\_cert\_manager\_service\_account) | n/a |
+| <a name="output_namespace"></a> [namespace](#output\_namespace) | n/a |
 <!-- END_TF_DOCS -->

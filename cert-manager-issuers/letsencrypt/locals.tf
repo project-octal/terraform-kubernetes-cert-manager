@@ -1,21 +1,21 @@
 locals {
-  solver_http01 = var.letsencrypt.solvers.http01 == null ? null : {
-    ingress = {
-      class = var.letsencrypt.solvers.http01.ingress_class
+  solver_http01 = var.letsencrypt.solvers.http01 == null ? [] : [{
+    http01 = {
+      ingress = {
+        class = var.letsencrypt.solvers.http01.ingress_class
+      }
     }
-  }
+  }]
 
-  solver_dns01 = var.letsencrypt.solvers.dns01 == null ? null : {
-    route53 = local.solver_dns01_route53
-  }
-
-  solver_dns01_route53 = var.letsencrypt.solvers.dns01.route53 == null ? null : {
-    region      = var.letsencrypt.solvers.dns01.route53.region
-    role        = var.letsencrypt.solvers.dns01.route53.role
-    accessKeyID = var.letsencrypt.solvers.dns01.route53.access_key_id
-    secretAccessKeySecretRef = var.letsencrypt.solvers.dns01.route53.access_key_secret == null ? null : {
-      name = var.letsencrypt.solvers.dns01.route53.access_key_secret.name
-      key  = var.letsencrypt.solvers.dns01.route53.access_key_secret.key
+  solver_dns01 = var.letsencrypt.solvers.dns01 == null ? [] : [{
+    dns01 = {
+      route53 = {
+        region = var.letsencrypt.solvers.dns01.route53.region
+        role   = var.letsencrypt.solvers.dns01.route53.role
+      }
     }
-  }
+  }]
+
+  # As we add support for more solvers we can add them here. Cloudflare will probably be next
+  enabled_solvers = concat(local.solver_http01, local.solver_dns01)
 }

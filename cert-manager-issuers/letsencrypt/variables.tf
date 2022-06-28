@@ -14,13 +14,8 @@ variable "letsencrypt" {
       }),
       dns01 = object({
         route53 = object({
-          region        = string,
-          role          = string,
-          access_key_id = string,
-          access_key_secret = object({
-            name = string,
-            key  = string
-          })
+          region = string,
+          role   = string
         })
       })
     })

@@ -1,4 +1,6 @@
 module "custom_resource_definitions" {
+  count = var.deploy_crds ? 1 : 0
+
   source = "./custom-resource-definitions"
 }
 

@@ -14,6 +14,12 @@ variable "namespace_annotations" {
   default     = {}
 }
 
+variable "deploy_crds" {
+  type        = bool
+  description = "Set to false if the cert-managers custom resource definitions will be deployed outside this module"
+  default     = true
+}
+
 variable "manager_image_tag" {
   type    = string
   default = "v1.8.1" #"v1.0.2" #"v0.13.0"

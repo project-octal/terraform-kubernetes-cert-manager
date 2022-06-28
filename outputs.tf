@@ -2,7 +2,8 @@ output "namespace" {
   value = kubernetes_namespace.namespace.metadata.0.name
 }
 output "cert_manager_service_account" {
-  value = module.cert_manager.service_account
+  depends_on = [module.cert_manager]
+  value      = module.cert_manager.service_account
 }
 output "cert_issuer" {
   # The issuer is only output once it's ready to issue certs.

@@ -1,6 +1,5 @@
 variable "name" {
-  type    = string
-  default = "cert-manager"
+  type = string
 }
 variable "instance_id" {
   type = string

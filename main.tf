@@ -30,6 +30,7 @@ module "cert_manager" {
 
   depends_on = [module.custom_resource_definitions]
 
+  name              = var.name
   instance_id       = local.instance_id
   namespace         = kubernetes_namespace.namespace.metadata.0.name
   image_tag         = var.manager_image_tag
@@ -37,6 +38,7 @@ module "cert_manager" {
   image_repository  = var.image_repository
   image_pull_policy = var.image_pull_policy
   labels            = local.labels
+
 
   service_account_annotations = local.eks_role_annotation
   deployment_annotations      = local.eks_role_annotation

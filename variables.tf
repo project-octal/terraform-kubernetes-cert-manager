@@ -1,3 +1,8 @@
+variable "name" {
+  type        = string
+  description = "The name given to this Cert-Manager deployment."
+  default     = "cert-manager"
+}
 variable "namespace" {
   type        = string
   description = "The namespace that Cert-Manager will reside in."

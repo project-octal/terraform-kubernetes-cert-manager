@@ -60,7 +60,17 @@ variable "certificate_issuers" {
       email : string,
       secret_base64_key : string,
       default_issuer : bool,
-      ingress_class : string
+      solvers = object({
+        http01 = object({
+          ingress_class = string
+        }),
+        dns01 = object({
+          route53 = object({
+            region = string,
+            role   = string
+          })
+        })
+      })
     })
     # TODO: Add support for another one so this doesnt look so silly
   })

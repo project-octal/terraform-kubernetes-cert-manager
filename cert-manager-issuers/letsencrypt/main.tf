@@ -1,30 +1,11 @@
-variable "name" {
-  type = string
-}
-variable "namespace" {
-  type = string
-}
-variable "server" {
-  type = string
-}
-variable "email" {
-  type = string
-}
-variable "ingress_class" {
-  type = string
-}
-variable "secret_base64_key" {
-  type = string
-}
-
 resource "kubernetes_secret" "letsencrypt_issuer_secret" {
   metadata {
-    name      = var.name
+    name      = var.letsencrypt.name
     namespace = var.namespace
   }
   data = {
     # We decode it before injecting it because the provider will re-encode it.
-    "tls.key" = base64decode(var.secret_base64_key)
+    "tls.key" = base64decode(var.letsencrypt.secret_base64_key)
   }
 }
 
@@ -33,25 +14,24 @@ resource "kubernetes_manifest" "letsencrypt_issuer" {
     apiVersion = "cert-manager.io/v1"
     kind       = "ClusterIssuer"
     metadata = {
-      name = var.name
+      name = var.letsencrypt.name
       labels = {
-        name = var.name
+        name = var.letsencrypt.name
       }
     }
     spec = {
       acme = {
-        server = var.server
-        email  = var.email
+        server = var.letsencrypt.server
+        email  = var.letsencrypt.email
         privateKeySecretRef = {
           name = kubernetes_secret.letsencrypt_issuer_secret.metadata.0.name
         }
         solvers = [
           {
-            http01 = {
-              ingress = {
-                class = var.ingress_class
-              }
-            }
+            http01 = local.solver_http01
+          },
+          {
+            dns01 = local.solver_dns01
           }
         ]
       }

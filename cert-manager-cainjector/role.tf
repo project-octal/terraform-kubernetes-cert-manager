@@ -21,9 +21,9 @@ resource "kubernetes_role" "role" {
     resources = [
       "leases"
     ]
-    resource_names = [
-      "cert-manager-cainjector-leader-election"
-    ]
+    //resource_names = [
+    //  "cert-manager-cainjector-leader-election"
+    //]
     verbs = ["get", "create", "update", "patch"]
   }
 }
